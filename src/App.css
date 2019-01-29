@@ -1,0 +1,27 @@
+.gameContainer {
+  padding: 100px;
+}
+.board {
+  text-align: center;
+}
+
+.board {
+  border: 1px solid black;
+  height: 400px;
+  width: 400px;
+}
+
+.square {
+  height: 50px;
+  width: 50px;
+  float: left;
+  cursor: pointer;
+}
+
+.dark {
+  background-color: black;
+}
+
+.light {
+  background-color: white
+}
