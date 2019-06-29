@@ -15,7 +15,8 @@ class App extends Component {
       time: this.game.time,
       score: this.game.score,
       testSquare: this.game.testSquare,
-      highScore: this.game.highScore
+      highScore: this.game.highScore,
+      history: this.game.history
     }
   }
   start(board, game) {
@@ -42,11 +43,13 @@ class App extends Component {
   }
   recordGuess(guess, game) {
     const correct = this.state.testSquare.rank === guess.rank && this.state.testSquare.file === guess.file
+    const testSquare = this.getSquare(this.board);
     if (correct) {
       this.addPoint(game)
     }
-    game.history.push({guess, testSquare: game.testSquare, correct})
-    this.setState({testSquare: this.getSquare(this.board)})
+    game.history.push({guess, testSquare: this.state.testSquare, correct})
+    const history = game.history;
+    this.setState({testSquare, history})
   }
   handleSquareClick(e) {
     const { id } = e.target
@@ -78,7 +81,7 @@ class App extends Component {
           <Squares squares={board.squares} handleClick={this.handleSquareClick.bind(this)} />
         </div>
         <div>
-          <History history={this.game.history}/>
+          <History history={this.state.history}/>
         </div>
       </div>
     )

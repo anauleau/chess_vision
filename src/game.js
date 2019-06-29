@@ -11,7 +11,7 @@ class Game {
         this.score = 0;
         this.highScore = 0;
         this.history = [];
-        this.time = 10;
+        this.time = 60;
         this.interval = null;
         this.testSquare = {rank: undefined, file: undefined}
         this.gameInProgress = false
