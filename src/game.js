@@ -7,35 +7,15 @@
 */
 
 class Game {
-    constructor () {
+    constructor (setState) {
         this.score = 0;
+        this.highScore = 0;
         this.history = [];
-        this.time = 60;
+        this.time = 10;
         this.interval = null;
         this.testSquare = {rank: undefined, file: undefined}
-    }
-    start(board) {
-        let { interval, time } = this
-        this.testSquare = this.getSquare(board)
-        interval = setInterval(()=>{
-            time -= 1
-            console.log(time)
-            if (time === 0) clearInterval(interval)
-        }, 1000)
-    }
-    addPoint() {
-        this.score++
-    }
-    recordGuess(move) {
-        this.history.push(move)
-    }
-    guess(target) {
-        const {rank, file} = target
-        const move = {rank, file}
-        this.recordGuess(move)
-    }
-    getSquare(board) {
-        return board.chooseNewSquare()
+        this.gameInProgress = false
+        this.setState = setState
     }
 }
 
@@ -59,11 +39,11 @@ class Board {
         this.columns = {A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6, H: 7}
     }
     init () {
-        this.board.map((row, i) => {
-            row.map((col, j) => {
+        this.board.map((row, i) => (
+            row.map((col, j) => (
                 this.squares.push(this.createSquare(i, j))
-            })
-        })
+            ))
+        ))
     }
     createSquare (row, column) {
         return new Square(this.ranks[row], this.files[column])
@@ -102,12 +82,6 @@ class Board {
 
 class Square {
     constructor (rank, file) {
-        const darkSquares = [
-            "B8", "D8", "F8", "H8", "A7", "C7", "E7", "G7",
-            "B6", "D6", "F6", "H6", "A5", "C5", "E5", "G5",
-            "B4", "D4", "F4", "H4", "A3", "C3", "E3", "G3",
-            "B2", "D2", "F2", "H2", "A1", "C1", "E1", "G1"
-        ]
         const lightSquares = [
             "A8", "C8", "E8", "G8", "B7", "D7", "F7", "H7",
             "A6", "C6", "E6", "G6", "B5", "D5", "F5", "H5",
