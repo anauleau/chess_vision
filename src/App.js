@@ -25,7 +25,7 @@ class App extends Component {
     game.gameInProgress = true
     let { interval, time } = game
     game.testSquare = this.getSquare(board)
-    this.setState({testSquare: game.testSquare})
+    this.setState({testSquare: game.testSquare, history: game.history})
     interval = setInterval(() => {
         time -= 1
         if (time === 0) {
